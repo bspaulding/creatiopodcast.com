@@ -4,13 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "DEBUG=metalsmith:metadata  chokidar '**/*' -i build -c 'node build.js'",
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jstransformer-handlebars": "^1.1.0",
     "metalsmith": "^2.3.0",
-    "metalsmith-layouts": "^2.3.0"
+    "metalsmith-collections": "^0.9.0",
+    "metalsmith-debug": "^1.2.0",
+    "metalsmith-gzip": "^1.1.0",
+    "metalsmith-imagemin": "^4.1.3",
+    "metalsmith-layouts": "^2.3.0",
+    "metalsmith-permalinks": "^2.0.0",
+    "prettier": "^1.15.3"
   }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://use.typekit.net/otf6eva.css">
+		<link rel="stylesheet" href="/index.css" />
+		<title>creatio > {{title}}</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li{{#ifEqual title "about"}} class="active"{{/ifEqual}}><a href="/about">about</a></li>
+					<li{{#ifEqual title "episodes"}} class="active"{{/ifEqual}}><a href="/episodes">episodes</a></li>
+					<li{{#ifEqual title "subscribe"}} class="active"{{/ifEqual}}><a href="/subscribe">subscribe</a></li>
+					<li{{#ifEqual title "contact"}} class="active"{{/ifEqual}}><a href="/contact">contact</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div class="splash">
+			<h1>CREATiO</h1>
+			<h2>a podcast about making</h2>
+			<a href="https://unsplash.com/photos/SshYpuf607g">Photo by Aperture Vintage on Unsplash</a>
+		</div>
+		<section class="content">
+			{{{ contents }}}
+		</section>
+		<footer>
+			<span>Copyright Bradley J. Spaulding 2018</span>
+		</footer>
+	</body>
+</html>
+
