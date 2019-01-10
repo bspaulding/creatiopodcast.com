@@ -25,7 +25,7 @@ Handlebars.registerHelper("enforce", function(x, prop) {
   throw new Error(`Required value for ${prop} not found in ${x.path}`);
 });
 
-Metalsmith(__dirname)
+const ms = Metalsmith(__dirname)
   .metadata({
     sitename: "Creatio Podcast",
     siteurl: "https://www.creatiopodcast.com",
@@ -49,12 +49,15 @@ Metalsmith(__dirname)
       ]
     })
   )
-  .use(layouts())
-  // .use(imagemin())
-  // .use(gzip())
-  .use(debug())
-  .build(err => {
-    if (err) {
-      console.error("Metalsmith build failed: ", err);
-    }
-  });
+  .use(layouts());
+
+if (process.env.ENV === "production") {
+  ms.use(imagemin());
+  ms.use(gzip());
+}
+
+ms.use(debug()).build(err => {
+  if (err) {
+    console.error("Metalsmith build failed: ", err);
+  }
+});
