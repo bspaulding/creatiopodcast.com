@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG=metalsmith:* chokidar '**/*' -i build -c 'node build.js'",
+    "dev": "DEBUG=metalsmith:* chokidar --initial '**/*' -i build -c 'node build.js'",
     "deploy": "aws s3 sync build s3://www.creatiopodcast.com",
     "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
