@@ -29,7 +29,6 @@ Handlebars.registerHelper("enforce", function(x, prop) {
 });
 
 const build = done => {
-  console.log("build");
   const ms = Metalsmith(__dirname)
     .metadata({
       sitename: "Creatio Podcast",
@@ -71,8 +70,14 @@ const build = done => {
     if (err) {
       console.error("Metalsmith build failed: ", err);
     }
-    done();
+    if ("function" === typeof done) {
+      done();
+    }
   });
 };
 
-watch("./src/**/*", { ignoreInitial: false }, build);
+if (process.env.ENV === "production") {
+  build();
+} else {
+  watch("./src/**/*", { ignoreInitial: false }, build);
+}
