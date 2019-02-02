@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG=metalsmith:* chokidar --initial '**/*' -i build -c 'node build.js'",
+    "dev": "concurrently \"DEBUG=metalsmith:* node build.js\" \"ruby -run -e httpd build -p 8080\"",
     "deploy": "aws s3 sync build s3://www.creatiopodcast.com",
     "build": "ENV=production node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "glob-watcher": "^5.0.3",
     "jstransformer-handlebars": "^1.1.0",
     "metalsmith": "^2.3.0",
     "metalsmith-collections": "^0.9.0",
@@ -20,8 +21,10 @@
     "metalsmith-gzip": "^1.1.0",
     "metalsmith-imagemin": "^4.1.3",
     "metalsmith-layouts": "^2.3.0",
+    "metalsmith-livereload": "^0.1.0",
     "metalsmith-permalinks": "^2.0.0",
     "metalsmith-sass": "^1.5.1",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "simple-http-server": "^0.1.8"
   }
 }

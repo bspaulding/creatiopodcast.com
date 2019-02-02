@@ -6,6 +6,9 @@ const permalinks = require("metalsmith-permalinks");
 const gzip = require("metalsmith-gzip");
 const imagemin = require("metalsmith-imagemin");
 const debug = require("metalsmith-debug");
+const sass = require("metalsmith-sass");
+const livereload = require("metalsmith-livereload");
+const watch = require("glob-watcher");
 
 Handlebars.registerHelper("ifEqual", function(a, b, options) {
   if (a === b) {
@@ -25,39 +28,50 @@ Handlebars.registerHelper("enforce", function(x, prop) {
   throw new Error(`Required value for ${prop} not found in ${x.path}`);
 });
 
-const ms = Metalsmith(__dirname)
-  .metadata({
-    sitename: "Creatio Podcast",
-    siteurl: "https://www.creatiopodcast.com",
-    description: "Creatio is a podcast about making"
-  })
-  .source("./src")
-  .destination("./build")
-  .clean(true)
-  .use(
-    collections({
-      episodes: {
-        pattern: "episodes/*.html"
-      }
+const build = done => {
+  console.log("build");
+  const ms = Metalsmith(__dirname)
+    .metadata({
+      sitename: "Creatio Podcast",
+      siteurl: "https://www.creatiopodcast.com",
+      description: "Creatio is a podcast about making"
     })
-  )
-  .use(
-    permalinks({
-      pattern: ":title",
-      linksets: [
-        { match: { collection: "episodes" }, pattern: "episode/:date/:title" }
-      ]
-    })
-  )
-  .use(layouts());
+    .source("./src")
+    .destination("./build")
+    .clean(true)
+    .use(
+      collections({
+        episodes: {
+          pattern: "episodes/*.html"
+        }
+      })
+    )
+    .use(
+      permalinks({
+        pattern: ":title",
+        linksets: [
+          { match: { collection: "episodes" }, pattern: "episode/:date/:title" }
+        ]
+      })
+    )
+    .use(layouts())
+    .use(sass());
 
-if (process.env.ENV === "production") {
-  ms.use(imagemin());
-  ms.use(gzip());
-}
-
-ms.use(debug()).build(err => {
-  if (err) {
-    console.error("Metalsmith build failed: ", err);
+  if (process.env.ENV !== "production") {
+    ms.use(livereload({ debug: true, delay: 100 }));
   }
-});
+
+  if (process.env.ENV === "production") {
+    ms.use(imagemin());
+    ms.use(gzip());
+  }
+
+  ms.use(debug()).build(err => {
+    if (err) {
+      console.error("Metalsmith build failed: ", err);
+    }
+    done();
+  });
+};
+
+watch("./src/**/*", { ignoreInitial: false }, build);
