@@ -48,6 +48,7 @@ const build = done => {
     )
     .use(
       permalinks({
+        relative: false,
         pattern: ":title",
         linksets: [
           { match: { collection: "episodes" }, pattern: "episode/:date/:title" }
