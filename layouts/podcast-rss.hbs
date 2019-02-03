@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
-  <channel>
-    <title>Creatio Podcast</title>
-    <description>
+	<channel>
+		<title>Creatio Podcast</title>
+		<description>
 			a podcast about making
-    </description>
-    <link>https://creatiopodcast.com</link>
-    <language>en</language>
-    <copyright>2018 Bradley J. Spaulding</copyright>
+		</description>
+		<link>https://creatiopodcast.com</link>
+		<language>en</language>
+		<copyright>2018 Bradley J. Spaulding</copyright>
+		<category>Art</category>
+		<category>Music</category>
+		<category>Religion &amp; Spirituality:Christianity</category>
+		<itunes:explicit>No</itunes:explicit>
+		<image>
+			<url>http://www.creatiopodcast.com/images/iTunesArtwork@3x.png</url>
+			<title>Creatio Podcast</title>
+			<link>http://www.creatiopodcast.com</link>
+		</image>
+		{{#each episodes}}
+		<item>
+			<title>{{enforce this "title"}}</title>
+			<link>https://creatiopodcast.com/{{this.path}}</link>
+			<pubDate>Tue, 25 Dec 2018 06:00:00 -0500</pubDate>
+			<description>{{enforce this "description"}}</description>
+			<source url="http://www.creatiopodcast.com">Creatio Podcast</source>
+			<guid isPermaLink="false">{{this.guid}}</guid>
+			<itunes:author></itunes:author>
+			<itunes:subtitle></itunes:subtitle>
+			<itunes:summary>{{enforce this "description"}}</itunes:summary>
+			<itunes:duration>{{enforce this "duration"}}</itunes:duration>
+			<enclosure url="{{enforce this "mediaURL"}}" length="{{enforce this "sizeBytes"}}" type="audio/mpeg" />
+		</item>
+		{{/each}}
 	</channel>
-	{{#each episodes}}
-	<item>
-		<title>{{enforce this "title"}}</title>
-		<link>https://creatiopodcast.com/{{this.path}}</link>
-		<pubDate>Tue, 25 Dec 2018 06:00:00 -0500</pubDate>
-		<description>{{enforce this "description"}}</description>
-		<source url="https://creatiopodcast.com">Creatio Podcast</source>
-		<guid isPermaLink="false">{{this.guid}}</guid>
-		<itunes:author></itunes:author>
-		<itunes:subtitle></itunes:subtitle>
-		<itunes:summary>{{enforce this "description"}}</itunes:summary>
-		<itunes:duration>{{enforce this "duration"}}</itunes:duration>
-		<enclosure url={{enforce this "mediaURL"}} length={{enforce this "sizeBytes"}} type="audio/mpeg"/>
-	</item>
-	{{/each}}
 </rss>
-
-
