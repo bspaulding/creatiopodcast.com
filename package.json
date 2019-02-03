@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "dayjs": "^1.8.2",
     "glob-watcher": "^5.0.3",
     "jstransformer-handlebars": "^1.1.0",
     "metalsmith": "^2.3.0",
