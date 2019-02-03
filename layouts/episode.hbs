@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" href="https://use.typekit.net/otf6eva.css">
 	<link rel="stylesheet" href="/index.css" />
@@ -23,6 +24,11 @@
 		<a href="https://unsplash.com/photos/SshYpuf607g">Photo by Aperture Vintage on Unsplash</a>
 	</div>
 	<section class="content">
+		<a href="/episodes">← All Episodes</a>
+		<h1>Episode #{{episode}} - {{title}}</h1>
+		<p class="date">{{formatDate "dddd, MMMM D, YYYY" pubDate}}</p>
+		<p>{{description}}</p>
+		<audio src="{{mediaURL episode title}}" controls></audio>
 		{{{ contents }}}
 	</section>
 	<footer>

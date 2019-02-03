@@ -172,6 +172,29 @@ section.content {
       margin-top: 0px;
     }
   }
+
+  .date {
+    font-size: 0.9em;
+  }
+
+  a {
+    font-size: 0.9em;
+  }
+  .episodes-count {
+    font-size: 0.9em;
+  }
+  .episodes {
+    list-style-type: none;
+    padding-left: 0px;
+
+    h2 {
+      font-size: 1.3em;
+    }
+
+    a {
+      font-size: 0.9em;
+    }
+  }
 }
 
 footer {
