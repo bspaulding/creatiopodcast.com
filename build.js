@@ -9,6 +9,7 @@ const debug = require("metalsmith-debug");
 const sass = require("metalsmith-sass");
 const livereload = require("metalsmith-livereload");
 const watch = require("glob-watcher");
+const dayjs = require("dayjs");
 
 Handlebars.registerHelper("ifEqual", function(a, b, options) {
   if (a === b) {
@@ -26,6 +27,19 @@ Handlebars.registerHelper("enforce", function(x, prop) {
   }
 
   throw new Error(`Required value for ${prop} not found in ${x.path}`);
+});
+Handlebars.registerHelper("formatDate", function(format, date) {
+  return dayjs(date).format(format);
+});
+Handlebars.registerHelper("mediaURL", function(episode, title) {
+  if (!episode) {
+    throw new Error(`Required value for episode not found`);
+  }
+  if (!title) {
+    throw new Error(`Required value for title not found`);
+  }
+
+  return `http://media.creatiopodcast.com/${episode}-${title}.mp3`;
 });
 
 const build = done => {
@@ -82,5 +96,5 @@ const build = done => {
 if (process.env.ENV === "production") {
   build();
 } else {
-  watch("./src/**/*", { ignoreInitial: false }, build);
+  watch("./(src|layouts)/**/*", { ignoreInitial: false }, build);
 }
