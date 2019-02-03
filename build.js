@@ -50,7 +50,10 @@ const build = done => {
         relative: false,
         pattern: ":title",
         linksets: [
-          { match: { collection: "episodes" }, pattern: "episode/:date/:title" }
+          {
+            match: { collection: "episodes" },
+            pattern: "episode/:episode-:title"
+          }
         ]
       })
     )
